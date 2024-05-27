@@ -4,17 +4,24 @@ const Videobeam = require('../models/videobeam');
 async function getVideobeam(req, res) {
   try {
     const {sn, status} = req.query;
+    const result = [];
     
     const filter = {};
 
     if (sn) filter.sn = sn
     if (status) filter.status = status
-    
+
     const response = await Videobeam.find(filter);
 
     if (!response[0]) return res.status(400).send({msg: "NO SE ENCONTRARON VIDEOBEAMS", status: false});
 
-    return res.status(200).send({msg: response, status: true});
+    response.map((data, index) => {
+      data = data.toObject();
+      delete data.__v;
+      result.push(data);
+    });
+
+    return res.status(200).send({msg: result, status: true});
     
   } catch (error) {
     console.error({msg: `ERROR AL HACER PETICION getVideobeam:  ${error}`, status: false});
