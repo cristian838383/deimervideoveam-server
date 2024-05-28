@@ -5,6 +5,7 @@ const Videobeam = require('../models/videobeam');
 async function getFacturaprestamo(req, res) {
   try {
     const {id_room, id_videobeam, date_request, date_prestamo} = req.query;
+    console.log("🚀 ~ getFacturaprestamo ~ req.query:", req.query)
     
     const filter = {};
 
@@ -24,6 +25,7 @@ async function getFacturaprestamo(req, res) {
     return res.status(500).send({msg: `ERROR AL OBTENER LOS DATOS: ${error}`, status: false});
   }
 }
+
 
 async function postFacturaprestamo(req, res) {
   try {
