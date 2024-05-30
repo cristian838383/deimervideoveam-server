@@ -52,14 +52,13 @@ async function postVideobeam(req, res) {
 async function updateVideobeam(req, res) {
   try {
     const {_id, sn, newsn, status} = req.query;
-
     
     const filter = {}
     const update = {};
     
     if (newsn) update.sn = parseInt(newsn);
     if (status) {
-      update.status = status;
+      update.status = Boolean(status);
     } else {
       update.status = true;
     }
