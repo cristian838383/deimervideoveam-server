@@ -29,10 +29,11 @@ async function postRoom(req, res) {
       numberroom
     });
 
-    const videobeamStorage = await room.save();
-    if (!videobeamStorage) res.status(400).send({msg: "ERROR AL GUARDAR LOS DATOS", status: false});
-    
-    return res.status(200).send({msg: videobeamStorage, status: true});
+    const roomStorage = await room.save();
+    console.log("🚀 ~ postRoom ~ roomStorage:", roomStorage)
+    if (!roomStorage) res.status(400).send({msg: "ERROR AL GUARDAR LOS DATOS", status: false});
+
+    return res.status(200).send({msg: roomStorage, status: true});
 
   } catch (error) {
     console.error({msg: `ERROR AL HACER PETICION postRoom:  ${error}`, errorCode: error.code, status: false});

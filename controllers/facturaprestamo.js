@@ -5,7 +5,6 @@ const Videobeam = require('../models/videobeam');
 async function getFacturaprestamo(req, res) {
   try {
     const {id_room, id_videobeam, date_request, date_prestamo} = req.query;
-    console.log("🚀 ~ getFacturaprestamo ~ req.query:", req.query)
     
     const filter = {};
 
@@ -29,7 +28,7 @@ async function getFacturaprestamo(req, res) {
 
 async function postFacturaprestamo(req, res) {
   try {
-    const {id_room, id_videobeam, date_prestamo, sn} = req.body;
+    const {id_room, id_videobeam, date_prestamo, sn, name} = req.body;
 
     function esSabado(date_prestamo) {
       // Crear un objeto Date con la fecha proporcionada
@@ -53,7 +52,8 @@ async function postFacturaprestamo(req, res) {
       id_room,
       id_videobeam,
       date_request: new Date().toISOString(),
-      date_prestamo
+      date_prestamo,
+      name
     });
 
     const success = await Videobeam.updateOne({sn: id_videobeam}, { status: false });

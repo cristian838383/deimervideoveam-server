@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const FacturaprestamoSchema = new mongoose.Schema({
+  name: { 
+    type: String, // PASAR A DATE
+    required: true
+  },
   id_room: { 
     type: String, 
     required: true
@@ -16,7 +20,7 @@ const FacturaprestamoSchema = new mongoose.Schema({
   date_prestamo: { 
     type: Date, // PASAR A DATE
     required: true
-  },
+  }
 });
 
 module.exports = mongoose.model('Facturaprestamo', FacturaprestamoSchema);
